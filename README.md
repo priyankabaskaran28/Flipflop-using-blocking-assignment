@@ -72,8 +72,8 @@ endmodule
 ```
 #### SIMULATION OUTPUT
 
-------- paste the output here -------
----
+<img width="1040" height="601" alt="sr_ff" src="https://github.com/user-attachments/assets/f08ab774-e9bf-41a9-8990-afef04414cdd" />
+
 
 ### JK Flip-Flop (Blocking)
 ```verilog
@@ -100,14 +100,33 @@ endmodule
 ```
 ### JK Flip-Flop Test bench 
 ```verilog
+module jkfliplflop_tb;
+reg j,k,clk,rst;
+wire q;
+jkflipflop uut(j,k,clk,rst,q);
+always #5 clk=~clk;
+initial
+begin
+clk=0;
+j=0;k=0;
+rst=1;
+#10 rst=0;
+#10 j=1;k=0; //set
+#10 j=0;k=0; //hold
+#10 j=0;k=1; //reset
+#10 j=1;k=1; //invalid condition
+#10 j=1;k=0; //hold
+#20 $finish;
+end
+endmodule
 
 
 
 ```
 #### SIMULATION OUTPUT
 
-------- paste the output here -------
----
+<img width="1038" height="594" alt="jk_ff" src="https://github.com/user-attachments/assets/40b540d9-42cd-484b-b39b-dd60c62a47d3" />
+
 ### D Flip-Flop (Blocking)
 ```verilog
 module d_ff (
@@ -122,6 +141,25 @@ endmodule
 ```
 ### D Flip-Flop Test bench 
 ```verilog
+module tb_dff;
+reg D, clk, reset;
+wire Q;
+Dflipflop UUT (D, clk, reset, Q);
+  always #5 clk = ~clk;
+
+initial begin
+clk = 0; D = 0; reset = 1;
+#10 reset = 0;
+#10 D = 1;   
+#10 D = 0;   
+#10 D = 1;   
+#10 D = 1;   
+#10 D = 0;   
+#10 D = 1;   
+
+#20 $finish;
+end
+endmodule
 
 
 
@@ -129,8 +167,9 @@ endmodule
 
 #### SIMULATION OUTPUT
 
-------- paste the output here -------
----
+<img width="1920" height="1200" alt="Screenshot (24)" src="https://github.com/user-attachments/assets/c716371a-e13c-4e1d-ab01-eee7f74e3b00" />
+
+
 ### T Flip-Flop (Blocking)
 ```verilog
 module d_ff (
@@ -145,16 +184,30 @@ endmodule
 ```
 ### T Flip-Flop Test bench 
 ```verilog
+module tfliplflop_tb;
+reg t,clk,rst;
+wire q;
+tflipflop uut(t,clk,rst,q);
+always #5 clk=~clk;
+initial
+begin
+clk=0;
+t=0;
+rst=1;
+#10 rst=0;t=0;
+#10 t=1;
+#20 $finish;
+end
+endmodule
+
 
 
 
 ```
 
 #### SIMULATION OUTPUT
+<img width="1354" height="770" alt="t_ff" src="https://github.com/user-attachments/assets/c4c215c3-1d44-4f9d-9e5b-01b9a168e90d" />
 
-------- paste the output here -------
-
----
 
 ### RESULT
 
